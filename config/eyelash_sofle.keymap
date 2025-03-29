@@ -30,8 +30,9 @@
 
 #define LAYER_WIN  0
 #define LAYER_MAC  1
-#define LAYER_FN   2
-#define LAYER_CTRL 3
+#define LAYER_GAME 2
+#define LAYER_FN   3
+#define LAYER_CTRL 4
 
 / {
 
@@ -47,11 +48,11 @@
 
         win {
             bindings = <
-&kp GRAVE  &kp N1          &kp N2    &kp N3        &kp N4   &kp N5  &kp UP_ARROW     &kp N6    &kp N7        &kp N8    &kp N9                 &kp N0   &kp MINUS
-&kp TAB    &kp Q           &kp W     &kp E         &kp R    &kp T   &kp DOWN_ARROW   &kp Y     &kp U         &kp I     &kp O                  &kp P    &kp EQUAL
-&kp CAPS   &kp A           &kp S     &kp D         &kp F    &kp G   &kp LEFT_ARROW   &kp H     &kp J         &kp K     &kp L                  &kp SEMI &kp APOS
-&kp LSHFT  &kp Z           &kp X     &kp C         &kp V    &kp B   &kp RIGHT_ARROW  &kp N     &kp M         &kp COMMA &kp DOT                &kp FSLH &kp RSHIFT
-&kp C_MUTE &mo LAYER_CTRL  &kp LCTRL &kp BACKSPACE &kp LALT &kp ESC &kp C_PLAY_PAUSE &kp ENTER &mo LAYER_FN  &kp SPACE &kp LG(LA(LC(LSHIFT))) &kp LGUI
+&kp GRAVE  &kp N1   &kp N2    &kp N3        &kp N4   &kp N5  &kp C_VOLUME_UP   &kp N6    &kp N7        &kp N8    &kp N9         &kp N0   &kp MINUS
+&kp TAB    &kp Q    &kp W     &kp E         &kp R    &kp T   &kp C_VOLUME_DOWN &kp Y     &kp U         &kp I     &kp O          &kp P    &kp EQUAL
+&kp CAPS   &kp A    &kp S     &kp D         &kp F    &kp G   &kp C_PLAY_PAUSE  &kp H     &kp J         &kp K     &kp L          &kp SEMI &kp APOS
+&kp LSHFT  &kp Z    &kp X     &kp C         &kp V    &kp B   &kp C_PLAY_PAUSE  &kp N     &kp M         &kp COMMA &kp DOT        &kp FSLH &kp RSHIFT
+&kp C_MUTE &kp LGUI &kp LCTRL &kp BACKSPACE &kp LALT &kp ESC &kp C_MUTE        &kp ENTER &mo LAYER_FN  &kp SPACE &mo LAYER_CTRL &kp LGUI
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOL_DN>;
@@ -60,15 +61,28 @@
 
         mac {
             bindings = <
-&trans &trans &trans   &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
-&trans &trans &trans   &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
-&trans &trans &trans   &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
-&trans &trans &trans   &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
-&trans &trans &kp LGUI &trans &trans &trans &trans &trans &trans &trans &trans &kp LCTRL
+&trans &trans    &trans   &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+&trans &trans    &trans   &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+&trans &trans    &trans   &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+&trans &trans    &trans   &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+&trans &kp LCTRL &kp LGUI &trans &trans &trans &trans &trans &trans &trans &trans &kp LCTRL
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOL_DN>;
             display-name = "mac";
+        };
+
+        game {
+            bindings = <
+&trans &trans   &trans &trans    &trans   &trans &trans &trans &trans &trans        &trans &trans &trans
+&trans &trans   &trans &trans    &trans   &trans &trans &trans &trans &trans        &trans &trans &trans
+&trans &trans   &trans &trans    &trans   &trans &trans &trans &trans &trans        &trans &trans &trans
+&trans &trans   &trans &trans    &trans   &trans &trans &trans &trans &trans        &trans &trans &trans
+&trans &kp LALT &trans &kp SPACE &kp LSFT &trans &trans &trans &trans &kp BACKSPACE &trans &trans
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOL_DN>;
+            display-name = "game";
         };
 
         fn {
@@ -86,11 +100,11 @@
 
         ctrl {
             bindings = <
-&kp C_MUTE        &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2 &bt BT_SEL 3    &bt BT_SEL 4    &mmv MOVE_UP    &none       &none      &none &none &none &none
-&kp C_VOLUME_UP   &to LAYER_WIN &to LAYER_MAC &none        &none           &bt BT_CLR      &mmv MOVE_DOWN  &none       &none      &none &none &none &none
-&kp C_VOLUME_DOWN &out OUT_USB  &out OUT_BLE  &none        &none           &bt BT_CLR_ALL  &mmv MOVE_LEFT  &none       &none      &none &none &none &none
-&none             &mkp LCLK     &mkp MCLK     &mkp RCLK    &rgb_ug RGB_TOG &none           &mmv MOVE_RIGHT &none       &none      &none &none &none &none
-&none             &none         &none         &none        &sys_reset      &bootloader     &mkp LCLK       &bootloader &sys_reset &none &none &none
+&kp C_MUTE        &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2   &bt BT_SEL 3    &bt BT_SEL 4    &mmv MOVE_UP    &none       &none      &none &none &none &none
+&kp C_VOLUME_UP   &to LAYER_WIN &to LAYER_MAC &to LAYER_GAME &none           &bt BT_CLR      &mmv MOVE_DOWN  &none       &none      &none &none &none &none
+&kp C_VOLUME_DOWN &out OUT_USB  &out OUT_BLE  &none          &none           &bt BT_CLR_ALL  &mmv MOVE_LEFT  &none       &none      &none &none &none &none
+&none             &mkp LCLK     &mkp MCLK     &mkp RCLK      &rgb_ug RGB_TOG &none           &mmv MOVE_RIGHT &none       &none      &none &none &none &none
+&none             &none         &none         &none          &sys_reset      &bootloader     &mkp LCLK       &bootloader &sys_reset &none &none &none
             >;
 
             sensor-bindings = <&scroll_encoder>;
