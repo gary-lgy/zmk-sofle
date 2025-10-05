@@ -28,11 +28,12 @@
     trigger-period-ms = <16>;
 };
 
-#define LAYER_WIN  0
-#define LAYER_MAC  1
-#define LAYER_GAME 2
-#define LAYER_FN   3
-#define LAYER_CTRL 4
+#define LAYER_WIN    0
+#define LAYER_MAC    1
+#define LAYER_GAME   2
+#define LAYER_GAME_2 3
+#define LAYER_FN     4
+#define LAYER_CTRL   5
 
 / {
 
@@ -85,6 +86,19 @@
             display-name = "game";
         };
 
+        game2 {
+            bindings = <
+&trans    &trans   &trans &trans    &trans   &trans &trans &trans &trans &trans        &trans &trans &trans
+&mkp LCLK &trans   &trans &trans    &trans   &trans &trans &trans &trans &trans        &trans &trans &trans
+&mkp RCLK &trans   &trans &trans    &trans   &trans &trans &trans &trans &trans        &trans &trans &trans
+&trans    &trans   &trans &trans    &trans   &trans &trans &trans &trans &trans        &trans &trans &trans
+&trans    &trans   &trans &trans    &trans   &trans &trans &trans &trans &trans        &trans &trans
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOL_DN>;
+            display-name = "game2";
+        };
+
         fn {
             bindings = <
 &kp GRAVE   &kp F1 &kp F2         &kp F3   &kp F4   &kp F5 &trans &kp F6  &kp F7      &kp F8     &kp F9        &kp F10 &kp F11
@@ -100,11 +114,11 @@
 
         ctrl {
             bindings = <
-&kp C_MUTE        &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2   &bt BT_SEL 3    &bt BT_SEL 4    &mmv MOVE_UP    &none       &none      &none &none &none &none
-&kp C_VOLUME_UP   &to LAYER_WIN &to LAYER_MAC &to LAYER_GAME &none           &bt BT_CLR      &mmv MOVE_DOWN  &none       &none      &none &none &none &none
-&kp C_VOLUME_DOWN &out OUT_USB  &out OUT_BLE  &none          &none           &bt BT_CLR_ALL  &mmv MOVE_LEFT  &none       &none      &none &none &none &none
-&none             &mkp LCLK     &mkp MCLK     &mkp RCLK      &rgb_ug RGB_TOG &none           &mmv MOVE_RIGHT &none       &none      &none &none &none &none
-&none             &none         &none         &none          &sys_reset      &bootloader     &mkp LCLK       &bootloader &sys_reset &none &none &none
+&kp C_MUTE        &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2   &bt BT_SEL 3     &bt BT_SEL 4    &mmv MOVE_UP    &none       &none      &none &none &none &none
+&kp C_VOLUME_UP   &to LAYER_WIN &to LAYER_MAC &to LAYER_GAME &to LAYER_GAME_2 &bt BT_CLR      &mmv MOVE_DOWN  &none       &none      &none &none &none &none
+&kp C_VOLUME_DOWN &out OUT_USB  &out OUT_BLE  &none          &none            &bt BT_CLR_ALL  &mmv MOVE_LEFT  &none       &none      &none &none &none &none
+&none             &mkp LCLK     &mkp MCLK     &mkp RCLK      &rgb_ug RGB_TOG  &none           &mmv MOVE_RIGHT &none       &none      &none &none &none &none
+&none             &none         &none         &none          &sys_reset       &bootloader     &mkp LCLK       &bootloader &sys_reset &none &none &none
             >;
 
             sensor-bindings = <&scroll_encoder>;
